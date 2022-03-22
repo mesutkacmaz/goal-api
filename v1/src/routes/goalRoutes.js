@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+const schemas = require('../validations/goalValidations')
+const validate = require('../middlewares/validateMiddleware')
+
 const {
   getGoals,
   setGoal,
@@ -8,7 +11,10 @@ const {
   deleteGoal,
 } = require('../controllers/goalController')
 
-router.route('/').get(getGoals).post(setGoal)
+router
+  .route('/')
+  .get(getGoals)
+  .post(validate(schemas.setGoalValidation), setGoal)
 router.route('/:id').patch(updateGoal).delete(deleteGoal)
 
 module.exports = router
