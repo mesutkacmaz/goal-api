@@ -5,8 +5,8 @@ const validate = (schema) => (req, res, next) => {
     const errorMessages = error.details
       .map((detail) => detail.message)
       .join(', ')
-    res.status(400)
-    throw new Error(errorMessages)
+
+    return res.status(400).json({ message: errorMessages })
   }
 
   Object.assign(req, value)

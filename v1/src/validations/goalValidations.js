@@ -3,9 +3,14 @@ Joi.objectId = require('joi-objectid')(Joi)
 
 const setGoalValidation = Joi.object({
   text: Joi.string().required().min(3),
-  userId: Joi.objectId(),
+  user: Joi.objectId(),
+})
+
+const updateGoalValidation = Joi.object({
+  text: Joi.string().required().min(3),
 })
 
 module.exports = {
   setGoalValidation,
+  updateGoalValidation,
 }

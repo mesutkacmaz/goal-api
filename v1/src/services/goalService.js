@@ -1,7 +1,10 @@
 const Goal = require('../models/Goal')
 
-const list = () => {
-  return Goal.find()
+const list = (where) => {
+  return Goal.find(where || {}).populate({
+    path: 'user',
+    select: 'name email',
+  })
 }
 
 const insert = (goal) => {
@@ -16,9 +19,14 @@ const remove = (id) => {
   return Goal.findByIdAndDelete(id)
 }
 
+const findById = (id) => {
+  return Goal.findById(id)
+}
+
 module.exports = {
   list,
   insert,
   modify,
   remove,
+  findById,
 }
